@@ -64,7 +64,8 @@ namespace NorthWind_Sepet_Uygulamasi
                     urunler.Add(new Urun()
                     {
                         id = (int)kafa["ProductID"],
-                        name = (string)kafa["ProductName"]
+                        name = (string)kafa["ProductName"],
+                        miktar = -1
                     });
                 }
                 disconnect();
