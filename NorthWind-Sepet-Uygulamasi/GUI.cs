@@ -29,6 +29,9 @@ namespace NorthWind_Sepet_Uygulamasi
             lstProducts.DataSource = Ortak.urunler;
             lstProducts.DisplayMember = "name";
             lstProducts.ValueMember = "id";
+
+            Ortak.urunler[0].miktar = -1;
+            MessageBox.Show(Ortak.urunler[0].miktar.ToString());
         }
 
     }
