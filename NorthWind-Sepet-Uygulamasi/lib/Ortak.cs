@@ -12,8 +12,17 @@ namespace NorthWind_Sepet_Uygulamasi
     {
         public static List<Musteri> musteriler = new List<Musteri>();
         public static List<Urun> urunler = new List<Urun>();
-        public static List<Siparis> siparisler = new List<Siparis>();
+        public static List<Sepet> siparisler = new List<Sepet>();
         public static SqlConnection conn;
+
+        public static void sepeteAt(int musteriIndex, int urunIndex, int miktar = 10)
+        {
+            var e = urunler[urunIndex];
+            e.miktar = miktar;
+            urunler.RemoveAt(urunIndex);
+            musteriler[musteriIndex].sepet.Add(e);
+        }
+
 
         public static class cek
         {
@@ -35,6 +44,7 @@ namespace NorthWind_Sepet_Uygulamasi
             {
                 conn.Close();
             }
+
             public static void musteri()
             {
                 connect();

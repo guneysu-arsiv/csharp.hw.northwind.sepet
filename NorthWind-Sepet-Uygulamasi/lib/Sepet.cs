@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NorthWind_Sepet_Uygulamasi
 {
-    public class Siparis
+    public class Sepet
     {
         public List<Urun> urunler = new List<Urun>();
     }

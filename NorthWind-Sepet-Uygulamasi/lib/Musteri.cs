@@ -10,10 +10,23 @@ namespace NorthWind_Sepet_Uygulamasi
     {
         public string id { get; set; }
         public string name { get; set; }
-
+        public List<Urun> sepet = new List<Urun>();
+        public string etiket {
+            get
+            {
+                return ToString();
+            }
+        }
         public override string ToString()
         {
-            return name;
+            if (sepet.Count() > 0)
+            {
+                return String.Format("{0} [*]", name);
+            }
+            else
+            {
+                return name;
+            }
         }
     }
 }

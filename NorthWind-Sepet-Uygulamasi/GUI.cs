@@ -23,15 +23,62 @@ namespace NorthWind_Sepet_Uygulamasi
             Ortak.cek.urun();
 
             lstCustomers.DataSource = Ortak.musteriler;
-            lstCustomers.DisplayMember = "name";
+            lstCustomers.DisplayMember = "etiket";
             lstCustomers.ValueMember = "id";
 
+            lstProducts.DataSource = Ortak.urunler;
+            lstProducts.DisplayMember = "etiket";
+            lstProducts.ValueMember = "id";
+
+            Ortak.urunler[0].miktar = -1;
+        }
+
+        private void lstProducts_DoubleClick(object sender, EventArgs e)
+        {
+            int mindex = lstCustomers.SelectedIndex;
+            int uindex = lstProducts.SelectedIndex;
+
+            if (uindex > -1 && mindex > -1)
+            {
+                Ortak.sepeteAt(
+                    musteriIndex: lstCustomers.SelectedIndex,
+                    urunIndex: lstProducts.SelectedIndex
+                    );
+            }
+
+            lstCustomers.DataSource = null;
+            lstCustomers.Items.Clear();
+            lstCustomers.DataSource = Ortak.musteriler;
+            lstCustomers.DisplayMember = "etiket";
+            lstCustomers.ValueMember = "id";
+            lstCustomers.SetSelected(mindex, true);
+
+            lstProducts.DataSource = null;
+            lstProducts.Items.Clear();
             lstProducts.DataSource = Ortak.urunler;
             lstProducts.DisplayMember = "name";
             lstProducts.ValueMember = "id";
 
-            Ortak.urunler[0].miktar = -1;
-            MessageBox.Show(Ortak.urunler[0].miktar.ToString());
+            lstSepet.DataSource = null;
+            lstSepet.Items.Clear();
+            lstSepet.DataSource = Ortak.musteriler[lstCustomers.SelectedIndex].sepet;
+
+
+        }
+
+        private void lstCustomers_SelectedValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                lstSepet.DataSource = ((Musteri)lstCustomers.SelectedItem).sepet;
+                lstSepet.DisplayMember = "etiket";
+                lstSepet.ValueMember = "id";
+
+            }
+            catch (Exception)
+            {
+                
+            }
         }
 
     }

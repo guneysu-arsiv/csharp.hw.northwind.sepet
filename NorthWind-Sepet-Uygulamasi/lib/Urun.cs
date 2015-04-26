@@ -26,10 +26,19 @@ namespace NorthWind_Sepet_Uygulamasi
                 }
             }
         }
-
+        public string etiket {
+            get { return ToString(); }
+        }
         public override string ToString()
         {
-            return name;
+            if (_miktar == 0)
+            {
+                return name;
+            }
+            else
+            {
+                return String.Format("{0} [{1}]", name, _miktar.ToString());
+            }
         }
 
     }
