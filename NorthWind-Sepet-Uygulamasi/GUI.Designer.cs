@@ -31,6 +31,7 @@
             this.lstCustomers = new System.Windows.Forms.ListBox();
             this.lstProducts = new System.Windows.Forms.ListBox();
             this.lstSepet = new System.Windows.Forms.ListBox();
+            this.btnSiparisOlustur = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lstCustomers
@@ -43,6 +44,7 @@
             this.lstCustomers.Name = "lstCustomers";
             this.lstCustomers.Size = new System.Drawing.Size(200, 380);
             this.lstCustomers.TabIndex = 0;
+            this.lstCustomers.SelectedIndexChanged += new System.EventHandler(this.lstCustomers_SelectedIndexChanged);
             this.lstCustomers.SelectedValueChanged += new System.EventHandler(this.lstCustomers_SelectedValueChanged);
             // 
             // lstProducts
@@ -69,11 +71,23 @@
             this.lstSepet.Size = new System.Drawing.Size(272, 380);
             this.lstSepet.TabIndex = 2;
             // 
+            // btnSiparisOlustur
+            // 
+            this.btnSiparisOlustur.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSiparisOlustur.Location = new System.Drawing.Point(688, 13);
+            this.btnSiparisOlustur.Name = "btnSiparisOlustur";
+            this.btnSiparisOlustur.Size = new System.Drawing.Size(154, 23);
+            this.btnSiparisOlustur.TabIndex = 3;
+            this.btnSiparisOlustur.Text = "Sipariş Oluştur";
+            this.btnSiparisOlustur.UseVisualStyleBackColor = true;
+            this.btnSiparisOlustur.Click += new System.EventHandler(this.btnSiparisOlustur_Click);
+            // 
             // GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(817, 400);
+            this.ClientSize = new System.Drawing.Size(898, 400);
+            this.Controls.Add(this.btnSiparisOlustur);
             this.Controls.Add(this.lstSepet);
             this.Controls.Add(this.lstProducts);
             this.Controls.Add(this.lstCustomers);
@@ -91,6 +105,7 @@
         private System.Windows.Forms.ListBox lstCustomers;
         private System.Windows.Forms.ListBox lstProducts;
         private System.Windows.Forms.ListBox lstSepet;
+        private System.Windows.Forms.Button btnSiparisOlustur;
     }
 }
 

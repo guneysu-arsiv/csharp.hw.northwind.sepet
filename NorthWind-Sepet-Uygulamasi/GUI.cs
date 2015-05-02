@@ -31,6 +31,7 @@ namespace NorthWind_Sepet_Uygulamasi
             lstProducts.ValueMember = "id";
 
             Ortak.urunler[0].miktar = -1;
+            Ortak.musteriler[0].siparisOlustur();
         }
 
         private void lstProducts_DoubleClick(object sender, EventArgs e)
@@ -53,16 +54,21 @@ namespace NorthWind_Sepet_Uygulamasi
             lstCustomers.ValueMember = "id";
             lstCustomers.SetSelected(mindex, true);
 
+            uiRefreshProducts();
+            lstSepet.DataSource = null;
+            lstSepet.Items.Clear();
+            lstSepet.DataSource = Ortak.musteriler[lstCustomers.SelectedIndex].sepet;
+
+
+        }
+
+        private void uiRefreshProducts()
+        {
             lstProducts.DataSource = null;
             lstProducts.Items.Clear();
             lstProducts.DataSource = Ortak.urunler;
             lstProducts.DisplayMember = "name";
             lstProducts.ValueMember = "id";
-
-            lstSepet.DataSource = null;
-            lstSepet.Items.Clear();
-            lstSepet.DataSource = Ortak.musteriler[lstCustomers.SelectedIndex].sepet;
-
 
         }
 
@@ -79,6 +85,18 @@ namespace NorthWind_Sepet_Uygulamasi
             {
                 
             }
+        }
+
+        private void lstCustomers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lstCustomers.Enabled = false;
+        }
+
+        private void btnSiparisOlustur_Click(object sender, EventArgs e)
+        {
+            lstCustomers.Enabled = true;
+            Ortak.cek.urun();
+            uiRefreshProducts();
         }
 
     }
