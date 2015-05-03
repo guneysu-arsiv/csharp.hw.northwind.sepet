@@ -21,6 +21,8 @@ namespace NorthWind_Sepet_Uygulamasi
         {
             label1.Text = "Sepete Ürün Eklemek İçin, Ürünler Listesine çift tıklayın.\n\n";
             label1.Text += "Seçili Müşteri sipariş vermeden veya iptal etmeden yeni müşteri seçilemez.";
+            label1.Text += "ShipVia, EmployeeID, Quantity RANDOM olarak atanır.";
+
 
             uiInitCustomers();
             uiInitProducts();

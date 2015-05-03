@@ -88,8 +88,8 @@
             // 
             // label1
             // 
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.25F);
+            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 8.75F);
             this.label1.Location = new System.Drawing.Point(768, 159);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(127, 231);
@@ -114,7 +114,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(946, 400);
+            this.ClientSize = new System.Drawing.Size(934, 400);
             this.Controls.Add(this.btnVazgec);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSiparisOlustur);
