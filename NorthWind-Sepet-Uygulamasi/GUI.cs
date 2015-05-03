@@ -51,7 +51,15 @@ namespace NorthWind_Sepet_Uygulamasi
 
             if (musteri != null && urun != null)
             {
-                musteri.sepeteAt(urun);
+                try
+                {
+                    musteri.sepeteAt(urun);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
             }
             uiRefreshCustomers();
             uiRefreshProducts();
@@ -92,7 +100,6 @@ namespace NorthWind_Sepet_Uygulamasi
                 lstSepet.DataSource = ((Musteri)lstCustomers.SelectedItem).sepet;
                 lstSepet.DisplayMember = "etiket";
                 lstSepet.ValueMember = "id";
-
             }
             catch (Exception)
             {
@@ -110,7 +117,16 @@ namespace NorthWind_Sepet_Uygulamasi
             lstCustomers.Enabled = true;
             Ortak.cek.urun();
             Musteri musteri = (Musteri)lstCustomers.SelectedItem;
-            musteri.siparisOlustur();
+            try
+            {
+                musteri.siparisOlustur();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            } 
+
             uiInitProducts();
             uiRefreshCustomers();
             uiRefreshSepet();
@@ -123,9 +139,5 @@ namespace NorthWind_Sepet_Uygulamasi
             uiRefreshSepet();
             lstCustomers.Enabled = true;
         }
-
-
-
-
     }
 }

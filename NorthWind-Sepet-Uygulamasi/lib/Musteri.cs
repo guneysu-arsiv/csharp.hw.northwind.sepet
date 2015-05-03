@@ -40,8 +40,7 @@ namespace NorthWind_Sepet_Uygulamasi
             {
                 if (u.id == urun.id)
                 {
-                    System.Windows.Forms.MessageBox.Show("Aynı Üründen 2 adet Sipariş Edemezsiniz.");
-                    return;
+                    throw new Exception("Aynı Üründen 2 adet Sipariş Edemezsiniz.");
                 }
             }
             if (miktar == 0)
@@ -59,6 +58,11 @@ namespace NorthWind_Sepet_Uygulamasi
 
         public void siparisOlustur()
         {
+            if (sepet.Count == 0)
+            {
+               throw new Exception("Sipariş İçin En az Bir adet ürün seçin.");
+            }
+
             Ortak.connect();
             int EmployeeID = new Random().Next(1, 9);
             int ShipVia = new Random().Next(1, 3);
