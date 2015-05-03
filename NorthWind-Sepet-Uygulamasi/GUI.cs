@@ -19,47 +19,58 @@ namespace NorthWind_Sepet_Uygulamasi
 
         private void GUI_Load(object sender, EventArgs e)
         {
-            Ortak.cek.musteri();
+            label1.Text = "Sepete Ürün Eklemek İçin, Ürünler Listesine çift tıklayın.\n\n";
+            label1.Text += "Seçili Müşteri sipariş vermeden veya iptal etmeden yeni müşteri seçilemez.";
+
+            uiInitCustomers();
+            uiInitProducts();
+        }
+
+        private void uiInitProducts()
+        {
             Ortak.cek.urun();
-
-            lstCustomers.DataSource = Ortak.musteriler;
-            lstCustomers.DisplayMember = "etiket";
-            lstCustomers.ValueMember = "id";
-
             lstProducts.DataSource = Ortak.urunler;
             lstProducts.DisplayMember = "etiket";
             lstProducts.ValueMember = "id";
+        }
 
-            Ortak.urunler[0].miktar = -1;
-            Ortak.musteriler[0].siparisOlustur();
+        private void uiInitCustomers()
+        {
+            Ortak.cek.musteri();
+            lstCustomers.DataSource = Ortak.musteriler;
+            lstCustomers.DisplayMember = "etiket";
+            lstCustomers.ValueMember = "id";
         }
 
         private void lstProducts_DoubleClick(object sender, EventArgs e)
         {
-            int mindex = lstCustomers.SelectedIndex;
-            int uindex = lstProducts.SelectedIndex;
+            Musteri musteri = (Musteri)lstCustomers.SelectedItem;
+            Urun urun = (Urun)lstProducts.SelectedItem;
 
-            if (uindex > -1 && mindex > -1)
+            if (musteri != null && urun != null)
             {
-                Ortak.sepeteAt(
-                    musteriIndex: lstCustomers.SelectedIndex,
-                    urunIndex: lstProducts.SelectedIndex
-                    );
+                musteri.sepeteAt(urun);
             }
+            uiRefreshCustomers();
+            uiRefreshProducts();
+            uiRefreshSepet();
+        }
 
+        private void uiRefreshSepet()
+        {
+            lstSepet.DataSource = null;
+            lstSepet.Items.Clear();
+            lstSepet.DataSource = Ortak.musteriler[lstCustomers.SelectedIndex].sepet;
+        }
+
+        private void uiRefreshCustomers()
+        {
             lstCustomers.DataSource = null;
             lstCustomers.Items.Clear();
             lstCustomers.DataSource = Ortak.musteriler;
             lstCustomers.DisplayMember = "etiket";
             lstCustomers.ValueMember = "id";
-            lstCustomers.SetSelected(mindex, true);
-
-            uiRefreshProducts();
-            lstSepet.DataSource = null;
-            lstSepet.Items.Clear();
-            lstSepet.DataSource = Ortak.musteriler[lstCustomers.SelectedIndex].sepet;
-
-
+            lstCustomers.SetSelected(lstCustomers.SelectedIndex, true);
         }
 
         private void uiRefreshProducts()
@@ -84,7 +95,7 @@ namespace NorthWind_Sepet_Uygulamasi
             catch (Exception)
             {
                 
-            }
+            }   
         }
 
         private void lstCustomers_SelectedIndexChanged(object sender, EventArgs e)
@@ -96,8 +107,23 @@ namespace NorthWind_Sepet_Uygulamasi
         {
             lstCustomers.Enabled = true;
             Ortak.cek.urun();
-            uiRefreshProducts();
+            Musteri musteri = (Musteri)lstCustomers.SelectedItem;
+            musteri.siparisOlustur();
+            uiInitProducts();
+            uiRefreshCustomers();
+            uiRefreshSepet();
         }
+
+        private void btnVazgec_Click(object sender, EventArgs e)
+        {
+            Ortak.musteriler[lstCustomers.SelectedIndex].sepet.Clear();
+            uiRefreshCustomers();
+            uiRefreshSepet();
+            lstCustomers.Enabled = true;
+        }
+
+
+
 
     }
 }

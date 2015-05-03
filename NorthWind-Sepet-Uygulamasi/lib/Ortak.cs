@@ -16,14 +16,6 @@ namespace NorthWind_Sepet_Uygulamasi
         public static string connectionString = @"server=.; database=Northwind; integrated security=sspi;";
         public static SqlConnection conn;
 
-        public static void sepeteAt(int musteriIndex, int urunIndex, int miktar = 10)
-        {
-            var e = urunler[urunIndex];
-            e.miktar = miktar;
-            urunler.RemoveAt(urunIndex);
-            musteriler[musteriIndex].sepet.Add(e);
-        }
-
         public static void connect()
         {
             string baglanti = @"server=.; database={0}; Integrated Security = sspi;";
@@ -68,14 +60,15 @@ namespace NorthWind_Sepet_Uygulamasi
                 urunler.Clear();
                 connect();
                 SqlDataReader kafa = new SqlCommand(
-                    cmdText: "select ProductID, ProductName from Products", connection: conn).ExecuteReader();
+                    cmdText: "select ProductID, ProductName, UnitPrice from Products", connection: conn).ExecuteReader();
                 while (kafa.Read())
                 {
                     urunler.Add(new Urun()
                     {
                         id = (int)kafa["ProductID"],
                         name = (string)kafa["ProductName"],
-                        miktar = -1
+                        birimFiyat = (decimal)kafa["UnitPrice"],
+                        miktar = 0
                     });
                 }
                 disconnect();

@@ -10,6 +10,7 @@ namespace NorthWind_Sepet_Uygulamasi
     {
         public int id { get; set; }
         public string name { get; set; }
+        public decimal birimFiyat { get; set; }
 
         private int _miktar;
         public int miktar {
