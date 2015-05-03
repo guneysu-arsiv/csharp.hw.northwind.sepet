@@ -105,9 +105,10 @@ namespace NorthWind_Sepet_Uygulamasi
                 "Discount"
                 );
 
+            KOMUT = new SqlCommand(commandString, Ortak.conn);
             foreach (var urun in sepet)
             {
-                KOMUT = new SqlCommand(commandString, Ortak.conn);
+                KOMUT.Parameters.Clear();
                 KOMUT.Parameters.AddWithValue("@OrderID", OrderID);
                 KOMUT.Parameters.AddWithValue("@ProductID", urun.id);
                 KOMUT.Parameters.AddWithValue("@UnitPrice", urun.birimFiyat);
