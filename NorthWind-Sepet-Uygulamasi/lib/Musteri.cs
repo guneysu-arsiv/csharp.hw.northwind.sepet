@@ -113,7 +113,7 @@ namespace NorthWind_Sepet_Uygulamasi
                 KOMUT.Parameters.AddWithValue("@UnitPrice", urun.birimFiyat);
                 KOMUT.Parameters.AddWithValue("@Quantity", urun.miktar);
                 KOMUT.Parameters.AddWithValue("@Discount", 0);
-                var f = KOMUT.ExecuteNonQuery();
+                var f = KOMUT.ExecuteNonQueryAsync();
             }
 
             // Sepeti Boşaltalım.
